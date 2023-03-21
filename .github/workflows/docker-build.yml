@@ -48,13 +48,13 @@ jobs:
       - name: docker build
         # run: docker build . -t subnet-evm
         # run: docker build  --platform linux/amd64  -t subnet-evm .
-      #   run: docker build  -t subnet-evm .
-      run: docker build --build-arg AVALANCHE_VERSION=v1.9.11 -t subnet-evm:latest .  
-      #  run: docker build -t subnet-evm:latest . 
-        #working-directory: ./containers/subnet-evm
+        #   run: docker build  -t subnet-evm .
+        run: docker build --build-arg AVALANCHE_VERSION=v1.9.11 -t subnet-evm:latest .  
+        #  run: docker build -t subnet-evm:latest . 
+          #working-directory: ./containers/subnet-evm
 
-      #- name: docker run & sleep 5
-      #  run: docker run -dp 3000:3000 -t subnet-evm ; sleep 20
+        #- name: docker run & sleep 5
+        #  run: docker run -dp 3000:3000 -t subnet-evm ; sleep 20
 
       - name: GITHUB_REF
         run: echo ${GITHUB_REF##*/}
