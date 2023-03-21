@@ -45,8 +45,8 @@ jobs:
         run: echo ${GITHUB_REF##*/}
 
       - name: docker build
-        run: docker build . -t subnet-evm
-        #run: docker build  --platform linux/amd64  -t subnet-evm .
+        # run: docker build . -t subnet-evm
+        run: docker build  --platform linux/amd64  -t subnet-evm .
         #working-directory: ./containers/subnet-evm
 
       #- name: docker run & sleep 5
