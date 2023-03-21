@@ -45,53 +45,55 @@ jobs:
       - name: GITHUB_REF
         run: echo ${GITHUB_REF##*/}
 
-      # - name: docker build
-      #   # run: docker build . -t subnet-evm
-      #   # run: docker build  --platform linux/amd64  -t subnet-evm .
+      - name: docker build
+        # run: docker build . -t subnet-evm
+        # run: docker build  --platform linux/amd64  -t subnet-evm .
       #   run: docker build  -t subnet-evm .
-      #   #working-directory: ./containers/subnet-evm
+      run: docker build --build-arg AVALANCHE_VERSION=v1.9.11 -t subnet-evm:latest .  
+      #  run: docker build -t subnet-evm:latest . 
+        #working-directory: ./containers/subnet-evm
 
-      # #- name: docker run & sleep 5
-      # #  run: docker run -dp 3000:3000 -t subnet-evm ; sleep 20
+      #- name: docker run & sleep 5
+      #  run: docker run -dp 3000:3000 -t subnet-evm ; sleep 20
 
-      # - name: GITHUB_REF
-      #   run: echo ${GITHUB_REF##*/}
+      - name: GITHUB_REF
+        run: echo ${GITHUB_REF##*/}
 
-      # #- name: check url
-      # #  run: ./scripts/dockertesturl.sh http://localhost:3000/
-      # #  working-directory: ./containers/subnet-evm
+      #- name: check url
+      #  run: ./scripts/dockertesturl.sh http://localhost:3000/
+      #  working-directory: ./containers/subnet-evm
 
-      # #- name: check cors
-      # #  run: ./scripts/check_cors.rb http://localhost:3000/weavedb.DB/query
-      # #  working-directory: ./containers/subnet-evm
-      # - name: docker tag1
-      #   run: docker tag subnet-evm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm:latest
+      #- name: check cors
+      #  run: ./scripts/check_cors.rb http://localhost:3000/weavedb.DB/query
+      #  working-directory: ./containers/subnet-evm
+      - name: docker tag1
+        run: docker tag subnet-evm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm:latest
 
 
-      # # AWS Credentials
-      # - name: create .aws
-      #   run: mkdir ~/.aws
-      # - name: echo1
-      #   run: echo '[default]' > ~/.aws/credentials
-      # - name: echo2
-      #   run: echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-      # - name: echo3
-      #   run: echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+      # AWS Credentials
+      - name: create .aws
+        run: mkdir ~/.aws
+      - name: echo1
+        run: echo '[default]' > ~/.aws/credentials
+      - name: echo2
+        run: echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+      - name: echo3
+        run: echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
-      # - name: echo4
-      #   run: echo '[default]' > ~/.aws/config
-      # - name: echo5
-      #   run: echo "region = ${{ secrets.AWS_REGION }}" >> ~/.aws/config
+      - name: echo4
+        run: echo '[default]' > ~/.aws/config
+      - name: echo5
+        run: echo "region = ${{ secrets.AWS_REGION }}" >> ~/.aws/config
 
-      # # DOCKER PUSH
-      # - name: docker login
-      #   run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} |  docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION}}.amazonaws.com
-      # - name: docker push
-      #   run: docker push  --all-tags ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm
+      # DOCKER PUSH
+      - name: docker login
+        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} |  docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION}}.amazonaws.com
+      - name: docker push
+        run: docker push  --all-tags ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm
 
-      # # - name: delete old docker image
-      # #   run: ./scripts/delete_old_docker_images.rb subnet-evm eu-west-1
-      # #   working-directory: ./containers/subnet-evm
+      # - name: delete old docker image
+      #   run: ./scripts/delete_old_docker_images.rb subnet-evm eu-west-1
+      #   working-directory: ./containers/subnet-evm
 
       - name: Send custom JSON data to Slack workflow
         id: slack
