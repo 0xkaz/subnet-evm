@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Git checkout
+        uses: actions/checkout@v3
 
       - name: set up go
         uses: actions/setup-go@v3
@@ -63,7 +64,7 @@ jobs:
       #  run: ./scripts/check_cors.rb http://localhost:3000/weavedb.DB/query
       #  working-directory: ./containers/subnet-evm
       - name: docker tag1
-       run: docker tag  subnet-evm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm:latest
+        run: docker tag  subnet-evm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm:latest
 
       # AWS Credentials
       - name: create .aws
