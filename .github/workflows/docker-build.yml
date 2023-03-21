@@ -65,7 +65,7 @@ jobs:
       - name: docker tag1
        run: docker tag  subnet-evm:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/subnet-evm:latest
 
-¥      # AWS Credentials
+      # AWS Credentials
       - name: create .aws
         run: mkdir ~/.aws
       - name: echo1
